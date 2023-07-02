@@ -47,7 +47,7 @@ function isCollide(saanp){
 function gameEngine (){
     // bhaag 1: saanp hai khud ko hi dhas lega ( ´･･)ﾉ(._.`)🐍
     if(isCollide(snakeArr)){
-        moveSound.pause();
+        // moveSound.pause();
         moveSound2.pause();
         snakeVelocity={x:0, y:0};
         setTimeout(() => {
@@ -57,7 +57,7 @@ function gameEngine (){
             window.location=window.location;
         }, 100);
         moveSound2.play();
-        moveSound.play();
+        // moveSound.play();
         setTimeout(() => {
             snakeArr = [{x: 10, y: 12}];
         }, 90);
@@ -125,7 +125,7 @@ window.addEventListener('keydown', e =>{
     if(e.key === "ArrowUp" || e.key==="ArrowDown" || e.key==="ArrowLeft" || e.key==="ArrowRight"){
         setInterval(() => {
             moveSound2.play();
-            moveSound.play();
+            // moveSound.play();
         }, 100);
     }
 
