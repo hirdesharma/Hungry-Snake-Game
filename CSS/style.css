@@ -125,10 +125,10 @@
 }
 
 .head{
-    background: url("../images/snake.jpg.jpg");
+/*     background: url("../images/snake.jpg.jpg"); */
     background-size: cover;
     background-repeat: no-repeat;
-    /* background:linear-gradient(to bottom,rgb(112, 167, 115), rgb(6, 216, 94)); */
+    background:linear-gradient(to bottom,rgb(112, 167, 115), rgb(6, 216, 94));
     border: 1.5px solid rgb(3, 65, 8);
     border-radius: 20px;
     scale: 1.25;
