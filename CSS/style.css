@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* border: none; */
+}
+
+.body{
+    min-height: 100vh;
+    /* background: url("../images/wp2409819-snake-game-wallpapers.jpg"); */
+    background: url("../images/snake.jpg.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.instructions{
+    opacity:0.6;
+    border-radius: 2px;
+    scale: 2;
+    position: absolute;
+    padding-left: 4px;
+    font-size: 3px;
+    left: 70px;
+    top: 180px;
+    background-color: rgb(197, 146, 186);
+}
+.instructions:hover{
+    opacity: 1;
+    margin: 100px;
+    scale: 5;
+}
+.difficulty{
+    position: absolute;
+    right: 90px;
+    top: 30px;
+    height: 100px;
+    width: 220px;
+    text-align: center;
+    background: url("../images/snake.jpg.jpg");
+    background-size: 300px 100px;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    border: 2px solid rgb(189, 226, 174);
+}
+#difficulty-text{
+    transition: 0.3s;
+    border-radius: 5px;
+    color: rgb(2, 32, 7);
+    margin-bottom: 20px;
+    background-color: rgb(238, 197, 204);
+    font-weight: 900;
+    font-size: 1.6rem;
+}
+#set-difficulty{
+    padding: 6px;
+    background: transparent;
+    border: 2px solid white;
+    background-repeat: no-repeat;
+    font-weight: 900;
+    color: white;
+}
+#set-difficulty:focus{
+    color: black;
+    background-color: white;
+}
+.score-board{
+    height: 100px;
+    width: 200px;
+    /* background-color: red; */
+    border: 1px solid white;
+    background: url("../images/snake.jpg.jpg");
+    background-size: 300px 100px;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    position:absolute;
+    opacity: 0.6;
+    border-radius: 5px;
+    left: 30px;
+    top: 30px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 10px 10px 1px 8px rgb(8, 28, 46);
+    /* box-shadow: inset 0 0 12px 12px red, inset 0 0 3px 2px pink; */
+    /* background: linear-gradient(to right, orange,yellow,green,cyan,blue,violet); */
+}
+.score-board:hover{
+    scale: 1.2;
+}
+#highest-score{
+    transition: 0.3s;
+    border-radius: 5px;
+    color: rgb(2, 32, 7);
+    margin-bottom: 20px;
+    background-color: pink;
+    font-weight: 900;
+    font-size: 1.6rem;
+}
+#highest-score:hover{
+    scale: 1.2;
+}
+#score{
+    font-weight: 800;
+    z-index: 1;
+    font-size: 1.6rem;
+    text-shadow: -1px 1px 0 #000,
+                  1px 1px 0 #000c06,
+                  1px -1px 0 #000,
+                 -1px -1px 0 #000;
+    backdrop-filter: blur(3px) saturate(50%);
+    color: rgb(142, 145, 10);
+}
+#board{
+    border-radius: 7px;
+    background: linear-gradient(to top, rgb(188, 241, 188), rgb(228, 228, 105));
+    height: 92vmin;
+    width: 90vmin;
+    border: 4px solid black;
+    box-shadow: 50px 0px 290px 260px rgb(73, 97, 73);
+    display: grid;
+    grid-template-columns: repeat(18,1fr);
+    grid-template-rows: repeat(18,1fr);
+}
+
+.head{
+    background: url("../images/snake.jpg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background:linear-gradient(to bottom,rgb(112, 167, 115), rgb(6, 216, 94)); */
+    border: 1.5px solid rgb(3, 65, 8);
+    border-radius: 20px;
+    scale: 1.25;
+}
+.snake{
+    background:linear-gradient(to bottom,rgb(78, 133, 95), rgb(71, 189, 120));
+    border: 1px solid rgb(72, 148, 78);
+    border-radius: 20px;
+}
+.food{
+    background:linear-gradient(to bottom,rgb(243, 154, 243), rgb(181, 248, 209));
+    border: 1px dashed indianred;
+    border-radius: 14px;
+}
