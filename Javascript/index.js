@@ -3,17 +3,19 @@
 // Constants and Variable
 let snakeVelocity = {x: 0, y: 0};
 let board = document.getElementById('board');
+const buttonControl = document.querySelectorAll(".controls i");
 const foodSound = new Audio('sounds/snake-hissing-6092.mp3');
 const gameOverSound = new Audio('sounds/mixkit-cinematic-impact-waves-781.wav');
 const gameOverSound2 = new Audio('sounds/AGFAT7X-8-bit-game-lose.mp3');
-const moveSound = new Audio('sounds/chocalho-53806.mp3');
-const moveSound2 = new Audio('sounds/Snake Game - Theme Song.mp3');
+const moveSound = new Audio('sounds/Snake Game - Theme Song.mp3');
 const currScore = document.getElementById("score");
+const foodItemsArray = ["🐁","🍇","🍉","🍈","🍓","🍍","🍌","🥝","🍏","🍎","🍔","🍅","🥚",];
+let randomFoodIndex = Math.floor(Math.random()*foodItemsArray.length);;
 const diffLevel = document.getElementById("set-difficulty");
 const hiiScoreDisplay = document.getElementById("highest-score");
 let hiiScoreVal = 0;
 let score=0
-let speed = 6;
+let speed = 13;
 let lastPaintTime = 0;
 let snakeArr = [{x: 10, y: 12}];
 let food = {x: 13, y:4};
@@ -31,7 +33,7 @@ function main(currentTime){
 }
 
 function isCollide(saanp){
-    if(snakeArr[0].x>=18 || snakeArr[0].x<0 || snakeArr[0].y>=18 || snakeArr[0].y<0){
+    if(snakeArr[0].x>=31 || snakeArr[0].x<0 || snakeArr[0].y>=31 || snakeArr[0].y<0){
         gameOverSound.play();
         return true;
     }
@@ -47,20 +49,13 @@ function isCollide(saanp){
 function gameEngine (){
     // bhaag 1: saanp hai khud ko hi dhas lega ( ´･･)ﾉ(._.`)🐍
     if(isCollide(snakeArr)){
-        // moveSound.pause();
-        moveSound2.pause();
+        moveSound.pause();
         snakeVelocity={x:0, y:0};
-        setTimeout(() => {
-            alert("Aapka khel yahan samapt hota h");
-        }, 100);
-        setTimeout(() => {
-            window.location=window.location;
-        }, 100);
-        moveSound2.play();
+        // window.location=window.location;
+        alert("Aapka khel yahan samapt hota h");
         // moveSound.play();
-        setTimeout(() => {
-            snakeArr = [{x: 10, y: 12}];
-        }, 90);
+        snakeArr = [{x: 10, y: 12}];
+        food = {x: 13, y:4};
         score = 0;
     }
 
@@ -75,15 +70,16 @@ function gameEngine (){
         currScore.innerHTML = 'Score: '+score;
         foodSound.play();
         snakeArr.unshift({x: snakeArr[0].x + snakeVelocity.x, y:snakeArr[0].y + snakeVelocity.y})
-        let a=1,b=17;
+        let a=1,b=30;
+        randomFoodIndex = Math.floor(Math.random()*foodItemsArray.length);
         food = {x: Math.round(a+(b-a)*Math.random()), y: Math.round(a+(b-a)*Math.random())}
     }
     // ab saanp hilae.. matlab hilega *****************IMPORTANT SECTION****************
     for(let i=snakeArr.length-2; i>=0; --i){
         snakeArr[i+1]={...snakeArr[i]};
     }
-    snakeArr[0].x += snakeVelocity.x;
-    snakeArr[0].y += snakeVelocity.y;
+        snakeArr[0].x += snakeVelocity.x;
+        snakeArr[0].y += snakeVelocity.y;
 
     // bhaag 2: saanp aur khane ka asli roop dikhao 🍔🍔🍔
     board.innerHTML = "";
@@ -105,7 +101,8 @@ function gameEngine (){
     foodElement.style.gridColumnStart = food.x;
     foodElement.classList.add('food');
     board.appendChild(foodElement);
-
+    // selecting food from food array
+    foodElement.innerHTML = foodItemsArray[randomFoodIndex];
 }
 
 // Main logic || how the snake is moving main || saanp ka dil hai yahan
@@ -118,35 +115,49 @@ if(hiiScoreVal===null){
     hiiScoreDisplay.innerHTML = "Hii-Score: " + hiiScoreVal;
 }
 
-window.requestAnimationFrame(main);
-window.addEventListener('keydown', e =>{
-    // saanp chanlne laga};
-    // saaanp ki jhan jhan aur madhur geet
-    if(e.key === "ArrowUp" || e.key==="ArrowDown" || e.key==="ArrowLeft" || e.key==="ArrowRight"){
-        setInterval(() => {
-            moveSound2.play();
-            // moveSound.play();
-        }, 100);
-    }
+// changing direction ************************
 
+const changeDirection=(e)=>{
     switch (e.key) {
         case "ArrowUp":
+            if(snakeVelocity.x!=1 && snakeVelocity.y!=0 && snakeArr.length!=1)break;
             snakeVelocity.x = 0;
             snakeVelocity.y = -1;
             break;
         case "ArrowDown":
+            if(snakeVelocity.x!=-1 && snakeVelocity.y!=0 && snakeArr.length!=1)break;
             snakeVelocity.x = 0;
             snakeVelocity.y = 1;
             break;
         case "ArrowLeft":
+            if(snakeVelocity.x!=0 && snakeVelocity.y!=1 && snakeArr.length!=1)break;
             snakeVelocity.x = -1;
             snakeVelocity.y = 0;
             break;
         case "ArrowRight":
+            if(snakeVelocity.x!=0 && snakeVelocity.y!=-1 && snakeArr.length!=1)break;
             snakeVelocity.x = 1;
             snakeVelocity.y = 0;
             break;
         default:
             break;
     }
+}
+
+// button clicks mobile waale bhaiyon k liye***************
+
+buttonControl.forEach(key =>{
+    key.addEventListener("click",()=>changeDirection({key: key.dataset.key}));
+})
+
+window.requestAnimationFrame(main);
+window.addEventListener('keydown', e =>{
+    // saanp chanlne laga;
+    // saaanp ki jhan jhan aur madhur geet
+    if(e.key === "ArrowUp" || e.key==="ArrowDown" || e.key==="ArrowLeft" || e.key==="ArrowRight"){
+        setInterval(() => {
+            moveSound.play();
+        }, 10);
+    }
+    changeDirection(e);
 })
